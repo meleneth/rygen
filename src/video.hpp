@@ -3,6 +3,10 @@
 
 #include "mel_opengl.hpp"
 
+#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Rygen {
 
 class Video {
@@ -10,10 +14,32 @@ class Video {
     Video(int width, int height);
     ~Video();
 
+    void setup();
+
     int width;
     int height;
-    SDL_Window* display_window;
-    SDL_GLContext context;
+    SDL_Window *window;
+
+    GLuint texid;
+
+    GLuint entity_vbo;
+    //ShaderProgram *entity_shader;
+
+    glm::mat4 View;
+    glm::mat4 Projection;
+
+    GLuint widget_vbo;
+    //ShaderProgram *widget_shader;
+
+    GLuint texture_vbo;
+    //ShaderProgram *texture_shader;
+
+    GLuint widget_partial_texture_vbo;
+    // uses texture_shader since the shader is the same
+
+    //WidgetRendererTileCache *tile_cache;
+    
+    //Font *console_font;
 };
 
 }
