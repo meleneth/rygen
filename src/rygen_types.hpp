@@ -5,6 +5,10 @@
 #include<string>
 
 namespace Rygen {
+  class Video;
+  class Shader;
+  class ShaderProgram;
+
   typedef std::list<std::string> StringList;
 };
 

@@ -12,6 +12,7 @@ using std::list;
 using std::setprecision;
 using std::ios;
 using std::endl;
+using std::ifstream;
 
 Console Rygen::console;
 
@@ -107,6 +108,27 @@ void Console::box_log(string line)
     log("+" + Border + "+");
 }
 
+string Rygen::read_text_file(const char* filename)
+{
+  string return_string;
+  char line[256];
+
+  ifstream data_stream(filename, ifstream::in);
+
+  if (data_stream.is_open()) {
+    while (data_stream.good()) {
+      data_stream.getline(line, 256);
+      return_string += line;
+      return_string += "\n";
+    }
+    data_stream.close();
+  } else {
+    console << "[Shader] Error reading file: " << filename << endl;
+    return string("");
+  }
+
+  return return_string;
+}
 /*string Sapien::pointer_to_hex(void *ptr)
 {
   stringstream ss;

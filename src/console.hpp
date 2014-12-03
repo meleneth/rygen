@@ -60,6 +60,9 @@ namespace Rygen {
 
   std::string pointer_to_hex(void *ptr);
 
+  //evil, but lazy me wins
+  std::string read_text_file(const char* filename);
+
 }
 
 #endif

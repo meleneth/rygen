@@ -5,6 +5,8 @@
 
 #include "video.hpp"
 #include "console.hpp"
+#include "shader.hpp"
+#include "shader_program.hpp"
 
 using namespace Rygen;
 using namespace std;
@@ -53,7 +55,7 @@ void Video::setup()
   window = SDL_CreateWindow( ".sapien.", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL|SDL_WINDOW_SHOWN);
   
   // Create an OpenGL context associated with the window.
-  //SDL_GLContext glcontext = SDL_GL_CreateContext(window);
+  SDL_GLContext glcontext = SDL_GL_CreateContext(window);
   SDL_GL_CreateContext(window);
 
   // ask glew to activate opengl extensions
@@ -81,9 +83,9 @@ void Video::setup()
   // load the vertex data into the vertex buffer object on the video card
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, entity_vbo_data, GL_DYNAMIC_DRAW);
 
-  //Shader* vertex_shader   = asset_manager->get_shader(VERTEX, "entity.vert");
-  //Shader* fragment_shader = asset_manager->get_shader(FRAGMENT, "entity.frag");
-  //entity_shader   = asset_manager->get_shader_program(vertex_shader, fragment_shader);
+  Shader* vertex_shader   = get_shader(VERTEX, "entity.vert");
+  Shader* fragment_shader = get_shader(FRAGMENT, "entity.frag");
+  entity_shader   = get_shader_program(vertex_shader, fragment_shader);
   // end entity setup
 
   // start widget setup
@@ -118,11 +120,40 @@ void Video::setup()
 
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, widget_texture_vbo_data, GL_DYNAMIC_DRAW);
 
-  //vertex_shader   = asset_manager->get_shader(VERTEX, "texture.vert");
-  //fragment_shader = asset_manager->get_shader(FRAGMENT, "texture.frag");
-  //texture_shader  = asset_manager->get_shader_program(vertex_shader, fragment_shader);
+  vertex_shader   = get_shader(VERTEX, "texture.vert");
+  fragment_shader = get_shader(FRAGMENT, "texture.frag");
+  texture_shader  = get_shader_program(vertex_shader, fragment_shader);
 
   //load_console_font();
 
   // end widget setup
+}
+
+Shader* Video::get_shader(ShaderType type, string path)
+{
+    auto shader = new Shader(type);
+    if( shader->load(path)) {
+    } else {
+        delete shader;
+        shader = NULL;
+    }
+
+    return shader;
+}
+
+ShaderProgram* Video::get_shader_program(Shader* vertex_shader, Shader* fragment_shader)
+{
+    stringstream ss;
+    ss << vertex_shader->shader_id << "|" << fragment_shader->shader_id;
+    string program_id = ss.str();
+
+    auto program = new ShaderProgram();
+
+    if( program->link(vertex_shader->shader_id, fragment_shader->shader_id)) {
+    } else {
+        delete program;
+        program = NULL;
+    }
+
+    return program;
 }
