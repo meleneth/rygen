@@ -26,21 +26,7 @@ class Video {
     int height;
     SDL_Window *window;
 
-    GLuint texid;
 
-    GLuint entity_vbo;
-    ShaderProgram *entity_shader;
-
-    glm::mat4 View;
-    glm::mat4 Projection;
-
-    GLuint widget_vbo;
-    ShaderProgram *widget_shader;
-
-    GLuint texture_vbo;
-    ShaderProgram *texture_shader;
-
-    GLuint widget_partial_texture_vbo;
     // uses texture_shader since the shader is the same
 
     //WidgetRendererTileCache *tile_cache;

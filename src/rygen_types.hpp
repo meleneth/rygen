@@ -8,6 +8,8 @@ namespace Rygen {
   class Video;
   class Shader;
   class ShaderProgram;
+  class Texture;
+  class Demo;
 
   typedef std::list<std::string> StringList;
 };

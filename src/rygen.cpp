@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
   auto video =  Video(1024, 768);
   video.setup();
 
-  auto demo = Demo();
+  auto demo = Demo(video);
 
   demo.render_frame();
 
