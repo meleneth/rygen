@@ -13,27 +13,26 @@
 namespace Rygen {
 
 class Video {
-  public:
-    Video(int width, int height);
-    ~Video();
+public:
+  Video(int width, int height);
+  ~Video();
 
-    void setup();
+  void setup();
 
-    Shader* get_shader(ShaderType type, std::string raw_string);
-    ShaderProgram* get_shader_program(Shader* vertex_shader, Shader* fragment_shader);
+  Shader *get_shader(ShaderType type, std::string raw_string);
+  ShaderProgram *get_shader_program(Shader *vertex_shader,
+                                    Shader *fragment_shader);
 
-    int width;
-    int height;
-    SDL_Window *window;
+  int width;
+  int height;
+  SDL_Window *window;
 
+  // uses texture_shader since the shader is the same
 
-    // uses texture_shader since the shader is the same
+  // WidgetRendererTileCache *tile_cache;
 
-    //WidgetRendererTileCache *tile_cache;
-    
-    //Font *console_font;
+  // Font *console_font;
 };
-
 }
 
 #endif

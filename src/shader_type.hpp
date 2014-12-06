@@ -3,11 +3,7 @@
 
 namespace Rygen {
 
-  enum ShaderType {
-    VERTEX = 1,
-    FRAGMENT
-  };
-
+enum ShaderType { VERTEX = 1, FRAGMENT };
 }
 
 #endif

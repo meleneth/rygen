@@ -10,22 +10,19 @@
 using namespace std;
 using namespace Rygen;
 
-Shader::Shader(ShaderType stype)
-{
-    base_shader_path = "shaders/";
-    shader_type = stype;
-    shader_id = 0;
+Shader::Shader(ShaderType stype) {
+  base_shader_path = "shaders/";
+  shader_type = stype;
+  shader_id = 0;
 }
 
-Shader::~Shader()
-{
-    if (shader_id) {
-        glDeleteShader(shader_id);
-    }
+Shader::~Shader() {
+  if (shader_id) {
+    glDeleteShader(shader_id);
+  }
 }
 
-void Shader::print_log(GLuint object)
-{
+void Shader::print_log(GLuint object) {
   GLint log_length = 0;
 
   if (glIsShader(object))
@@ -37,7 +34,7 @@ void Shader::print_log(GLuint object)
     return;
   }
 
-  char* log = (char*)malloc(log_length);
+  char *log = (char *)malloc(log_length);
   if (glIsShader(object))
     glGetShaderInfoLog(object, log_length, NULL, log);
 
@@ -48,33 +45,30 @@ void Shader::print_log(GLuint object)
   free(log);
 }
 
-bool Shader::load(string shader_file)
-{
-    console << "[Shader] Loading shader file: " << shader_file << std::endl;
-    string shader_source = read_text_file(shader_file.c_str());
+bool Shader::load(string shader_file) {
+  console << "[Shader] Loading shader file: " << shader_file << std::endl;
+  string shader_source = read_text_file(shader_file.c_str());
 
-    GLuint res = glCreateShader(shader_type == VERTEX ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER);
-    const char* source = shader_source.c_str();
-    int len = strlen(source);
+  GLuint res = glCreateShader(shader_type == VERTEX ? GL_VERTEX_SHADER
+                                                    : GL_FRAGMENT_SHADER);
+  const char *source = shader_source.c_str();
+  int len = strlen(source);
 
-    glShaderSource(res, 1, &source, &len);
+  glShaderSource(res, 1, &source, &len);
 
-    glCompileShader(res);
-    GLint compile_ok = GL_FALSE;
-    glGetShaderiv(res, GL_COMPILE_STATUS, &compile_ok);
-    if (compile_ok == GL_FALSE) {
-        console << "[Shader] Failed to compile: " << shader_source << endl;
-        print_log(res);
-        glDeleteShader(res);
-        return false;
-    }
+  glCompileShader(res);
+  GLint compile_ok = GL_FALSE;
+  glGetShaderiv(res, GL_COMPILE_STATUS, &compile_ok);
+  if (compile_ok == GL_FALSE) {
+    console << "[Shader] Failed to compile: " << shader_source << endl;
+    print_log(res);
+    glDeleteShader(res);
+    return false;
+  }
 
-    shader_id = res;
+  shader_id = res;
 
-    return true;
+  return true;
 }
 
-size_t Shader::size_in_bytes(void)
-{
-    return 0;
-}
+size_t Shader::size_in_bytes(void) { return 0; }

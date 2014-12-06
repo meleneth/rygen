@@ -7,9 +7,8 @@
 using namespace std;
 using namespace Rygen;
 
-int main(int argc, char *argv[])
-{
-  auto video =  Video(1024, 768);
+int main(int argc, char *argv[]) {
+  auto video = Video(1024, 768);
   video.setup();
 
   auto demo = Demo(video);
@@ -20,6 +19,3 @@ int main(int argc, char *argv[])
   sleep(5);
   return 0;
 }
-
-
-
