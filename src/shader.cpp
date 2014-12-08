@@ -46,8 +46,9 @@ void Shader::print_log(GLuint object) {
 }
 
 bool Shader::load(string shader_file) {
-  console << "[Shader] Loading shader file: " << shader_file << std::endl;
-  string shader_source = read_text_file(shader_file.c_str());
+  string actual_file = base_shader_path + shader_file;
+  console << "[Shader] Loading shader file: " << actual_file << endl;
+  string shader_source = read_text_file(actual_file.c_str());
 
   GLuint res = glCreateShader(shader_type == VERTEX ? GL_VERTEX_SHADER
                                                     : GL_FRAGMENT_SHADER);

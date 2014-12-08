@@ -9,27 +9,26 @@ namespace Rygen {
 
 class Demo {
 public:
-  Demo(Video &video);
-  ~Demo();
+  Demo(const Video &video);
 
   void render_frame();
 
   GLuint texid;
   GLuint entity_vbo;
-  ShaderProgram *entity_shader;
+  std::shared_ptr<ShaderProgram> entity_shader;
 
   glm::mat4 View;
   glm::mat4 Projection;
 
   GLuint widget_vbo;
-  ShaderProgram *widget_shader;
+  std::shared_ptr<ShaderProgram> widget_shader;
 
   GLuint texture_vbo;
-  ShaderProgram *texture_shader;
+  std::shared_ptr<ShaderProgram> texture_shader;
 
   GLuint widget_partial_texture_vbo;
 
-  Texture *texture;
+  std::shared_ptr<Texture> texture;
 };
 }
 

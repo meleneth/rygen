@@ -7,7 +7,7 @@
 
 using namespace Rygen;
 
-Demo::Demo(Video &video) {
+Demo::Demo(const Video &video) {
   Projection = glm::ortho(0.0f, (float)video.width, 0.0f, (float)video.height,
                           -5.0f, 5.0f);
   View = glm::mat4(1.0f);
@@ -25,7 +25,7 @@ Demo::Demo(Video &video) {
 
   auto vertex_shader = video.get_shader(VERTEX, "texture.vert");
   auto fragment_shader = video.get_shader(FRAGMENT, "texture.frag");
-  texture_shader = video.get_shader_program(vertex_shader, fragment_shader);
+  texture_shader = video.get_shader_program(*vertex_shader, *fragment_shader);
 
   // start entity setup
   // vbo to store our vertex data on the video card
@@ -46,8 +46,6 @@ Demo::Demo(Video &video) {
 
   // end widget setup
 }
-
-Demo::~Demo() {}
 
 void Demo::render_frame() {
   glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);

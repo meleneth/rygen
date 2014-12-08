@@ -19,9 +19,9 @@ public:
 
   void setup();
 
-  Shader *get_shader(ShaderType type, std::string raw_string);
-  ShaderProgram *get_shader_program(Shader *vertex_shader,
-                                    Shader *fragment_shader);
+  ShaderPtr get_shader(const ShaderType type, const std::string raw_string) const;
+  ShaderProgramPtr get_shader_program(const Shader &vertex_shader,
+                                    const Shader &fragment_shader) const;
 
   int width;
   int height;

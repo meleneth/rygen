@@ -59,29 +59,27 @@ void Video::setup() {
   }
 }
 
-Shader *Video::get_shader(ShaderType type, string path) {
-  auto shader = new Shader(type);
+ShaderPtr Video::get_shader(const ShaderType type, const string path) const {
+  auto shader = make_shared<Shader>(type);
   if (shader->load(path)) {
   } else {
-    delete shader;
-    shader = NULL;
+    shader = nullptr;
   }
 
   return shader;
 }
 
-ShaderProgram *Video::get_shader_program(Shader *vertex_shader,
-                                         Shader *fragment_shader) {
+ShaderProgramPtr Video::get_shader_program(const Shader &vertex_shader,
+                                         const Shader &fragment_shader) const {
   stringstream ss;
-  ss << vertex_shader->shader_id << "|" << fragment_shader->shader_id;
+  ss << vertex_shader.shader_id << "|" << fragment_shader.shader_id;
   string program_id = ss.str();
 
-  auto program = new ShaderProgram();
+  auto program = make_shared<ShaderProgram>();
 
-  if (program->link(vertex_shader->shader_id, fragment_shader->shader_id)) {
+  if (program->link(vertex_shader.shader_id, fragment_shader.shader_id)) {
   } else {
-    delete program;
-    program = NULL;
+    program = nullptr;
   }
 
   return program;
