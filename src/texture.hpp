@@ -12,7 +12,7 @@ public:
   virtual ~Texture();
 
   virtual bool load(std::string path);
-  size_t size_in_bytes(void);
+  size_t size_in_bytes(void) const;
 
   GLuint GLtexID;
   int width;

@@ -9,6 +9,7 @@ namespace Rygen {
 class Video;
 class Shader;
 class ShaderProgram;
+class Image;
 class Texture;
 class Demo;
 

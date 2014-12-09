@@ -118,10 +118,11 @@ string Rygen::read_text_file(const char *filename) {
 
   return return_string;
 }
-/*string Sapien::pointer_to_hex(void *ptr)
+
+string Rygen::pointer_to_hex(void *ptr)
 {
   stringstream ss;
   ss << std::hex << ptr;
   return ss.str();
 }
-*/
+

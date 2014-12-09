@@ -14,6 +14,12 @@ CXXFLAGS="$CXXFLAGS $GL_CFLAGS"
 CPPFLAGS="$CPPFLAGS $GL_CFLAGS"
 LIBS="$LIBS $GL_LIBS"
 AC_CHECK_LIB(GLEW, glewInit, LIBS="$LIBS -lGLEW", AC_MSG_ERROR([GLEW required. Please see INSTALL]))
+
+# Check for SDL_image library
+ AC_CHECK_LIB(SDL2_image, IMG_LoadPNG_RW, , AC_MSG_ERROR([
+ *** Unable to find SDL_image libary with PNG support
+ (http://www.libsdl.org/projects/SDL_image/)
+ ]))
 AM_SILENT_RULES([yes])
 AM_PROG_AR
 AC_OUTPUT
