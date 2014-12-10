@@ -6,6 +6,7 @@
 #include "texture.hpp"
 
 using namespace Rygen;
+using namespace std;
 
 Demo::Demo(const Video &video) {
   Projection = glm::ortho(0.0f, (float)video.width, 0.0f, (float)video.height,
@@ -44,10 +45,13 @@ Demo::Demo(const Video &video) {
 
   // load_console_font();
 
+  texture = make_shared<Texture>();
+  texture->load("ship.png");
+
   // end widget setup
 }
 
-void Demo::render_frame() {
+void Demo::render_frame(Video & video) {
   glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
 
   texture_shader->activate();
@@ -94,4 +98,6 @@ void Demo::render_frame() {
   glDisableVertexAttribArray(1);
 
   texture_shader->deactivate();
+
+  SDL_GL_SwapWindow(video.window);  // Swap the window/buffer to display the result.
 }

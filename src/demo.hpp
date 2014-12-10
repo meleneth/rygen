@@ -11,7 +11,7 @@ class Demo {
 public:
   Demo(const Video &video);
 
-  void render_frame();
+  void render_frame(Video &video);
 
   GLuint texid;
   GLuint entity_vbo;

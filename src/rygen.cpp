@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
   auto demo = Demo(video);
 
-  demo.render_frame();
+  demo.render_frame(video);
 
   cout << "rygen: rygen\n";
   sleep(5);
