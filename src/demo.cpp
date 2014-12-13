@@ -52,6 +52,8 @@ Demo::Demo(const Video &video) {
 }
 
 void Demo::render_frame(Video & video) {
+  glEnable( GL_BLEND );
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
   glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
 
   texture_shader->activate();
@@ -100,4 +102,5 @@ void Demo::render_frame(Video & video) {
   texture_shader->deactivate();
 
   SDL_GL_SwapWindow(video.window);  // Swap the window/buffer to display the result.
+  glDisable( GL_BLEND );
 }
