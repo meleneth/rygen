@@ -21,7 +21,8 @@ Video::~Video() {}
 
 void Video::setup() {
   // init random number generator
-  srand((unsigned)time(0));
+  // FIXME cross platform issue
+  //srand((unsigned)time(0));
   console << "[WidgetRenderer] Going in hot, calling SDL_Init.." << endl;
   SDL_Init(SDL_INIT_VIDEO); // Init SDL2 (you should check for errors)
 
